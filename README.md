@@ -1,4 +1,3 @@
 #### Architecture
 
-![LOPCO architecture]
-(arch.png)
+![LOPCO architecture](arch.png)
