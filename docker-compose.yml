@@ -1,0 +1,147 @@
+version: "3"
+
+services:
+  portainer:
+    container_name: portainer
+    image: portainer/portainer
+    expose:
+      - 9000
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    restart: unless-stopped
+
+  reverse-proxy:
+    container_name: reverse-proxy
+    image: tinyproxy-env-conf
+    expose:
+      - 8000
+    ports:
+      - 8000:8000
+    environment:
+      - TP_User=tinyproxy
+      - TP_Group=tinyproxy
+      - TP_ViaProxyName="local-gw"
+      - TP_Port=8000
+      - TP_LogLevel=Info
+      - TP_ReverseOnly=Yes
+      - TP_MaxClients=100
+      - TP_MinSpareServers=10
+      - TP_MaxSpareServers=10
+      - TP_StartServers=10
+      - TP_Timeout=600
+      - TP_1_ReversePath="/http-adapter/" "http://http-adapter/"
+      - TP_2_ReversePath="/job-manager/" "http://job-manager/"
+      - TP_3_ReversePath="/machine-registry/" "http://machine-registry/"
+      - TP_4_ReversePath="/pipeline-registry/" "http://pipeline-registry/"
+      - TP_5_ReversePath="/worker-registry/" "http://worker-registry/"
+    networks:
+      - gw-network
+    restart: unless-stopped
+
+  http-adapter:
+    container_name: http-adapter
+    image: http-adapter
+    expose:
+      - 80
+    volumes:
+      - data_cache:/data_cache
+    environment:
+      - CONF_LOGGER_LEVEL=debug
+    networks:
+      - gw-network
+    restart: unless-stopped
+
+  job-manager:
+    container_name: job-manager
+    image: job-manager
+    expose:
+      - 80
+    volumes:
+      - job_manager_data:/usr/src/app/data
+      - data_cache:/data_cache
+    environment:
+      - CONF_LOGGER_LEVEL=debug
+    networks:
+      - gw-network
+    restart: unless-stopped
+
+  machine-registry:
+    container_name: machine-registry
+    image: crud-template-service
+    expose:
+      - 80
+    volumes:
+      - machine_registry_data:/usr/src/app/data
+    environment:
+      - CRUDCONF_LOGGER_NAME=machine-registry
+      - CRUDCONF_LOGGER_LEVEL=debug
+      - CRUDCONF_ENDPOINT_NAME=machines
+    networks:
+      - gw-network
+    restart: unless-stopped
+
+  pipeline-registry:
+    container_name: pipeline-registry
+    image: crud-template-service
+    expose:
+      - 80
+    volumes:
+      - pipeline_registry_data:/usr/src/app/data
+    environment:
+      - CRUDCONF_LOGGER_NAME=pipeline-registry
+      - CRUDCONF_LOGGER_LEVEL=debug
+      - CRUDCONF_ENDPOINT_NAME=pipelines
+      - CRUDCONF_ENDPOINT_ALLOW_POST=True
+    networks:
+      - gw-network
+    restart: unless-stopped
+
+  worker-registry:
+    container_name: worker-registry
+    image: crud-template-service
+    expose:
+      - 80
+    volumes:
+      - worker_registry_data:/usr/src/app/data
+    environment:
+      - CRUDCONF_LOGGER_NAME=worker-registry
+      - CRUDCONF_LOGGER_LEVEL=debug
+      - CRUDCONF_ENDPOINT_NAME=workers
+      - CRUDCONF_ENDPOINT_ALLOW_POST=True
+    networks:
+      - gw-network
+    restart: unless-stopped
+
+  worker-manager:
+    container_name: worker-manager
+    image: worker-manager
+    expose:
+      - 80
+    environment:
+      - CONF_LOGGER_LEVEL=debug
+      - CONF_DOCKER_SOCKET=unix://var/run/docker.sock
+      - CONF_DOCKER_NETWORK_NAME=core_gw-network
+      - CONF_DOCKER_RM_CONTAINER=True
+      - CONF_DATACACHE_VOLUME_NAME=core_data_cache
+    networks:
+      - gw-network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+volumes:
+  portainer_data:
+  data_cache:
+  job_manager_data:
+  machine_registry_data:
+  pipeline_registry_data:
+  worker_registry_data:
+
+networks:
+  gw-network:
+    ipam:
+      config:
+        - subnet: 10.30.0.0/16
