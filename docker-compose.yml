@@ -4,6 +4,7 @@ services:
   reverse-proxy:
     container_name: reverse-proxy
     image: tinyproxy-env-conf
+    build: https://github.com/y-du/tinyproxy-env-conf.git
     expose:
       - 8000
     ports:
@@ -59,6 +60,7 @@ services:
   machine-registry:
     container_name: machine-registry
     image: crud-template-service
+    build: https://github.com/y-du/crud-template-service.git
     expose:
       - 80
     volumes:
@@ -74,6 +76,7 @@ services:
   pipeline-registry:
     container_name: pipeline-registry
     image: crud-template-service
+    build: https://github.com/y-du/crud-template-service.git
     expose:
       - 80
     volumes:
@@ -90,6 +93,7 @@ services:
   worker-registry:
     container_name: worker-registry
     image: crud-template-service
+    build: https://github.com/y-du/crud-template-service.git
     expose:
       - 80
     volumes:
