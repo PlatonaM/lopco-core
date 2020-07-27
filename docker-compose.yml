@@ -103,6 +103,24 @@ services:
     labels:
       - "lopco-type=core"
     restart: unless-stopped
+
+  protocol-adapter-registry:
+    container_name: protocol-adapter-registry
+    image: crud-template-service
+    build: https://github.com/y-du/crud-template-service.git
+    expose:
+      - 80
+    volumes:
+      - protocol_adapter_registry_data:/usr/src/app/data
+    environment:
+      - CRUDCONF_LOGGER_NAME=protocol-adapter-registry
+      - CRUDCONF_LOGGER_LEVEL=debug
+      - CRUDCONF_ENDPOINT_NAME=protocol-adapters
+      - CRUDCONF_ENDPOINT_ALLOW_POST=True
+    networks:
+      - lopco-network
+    labels:
+      - "lopco-type=core"
     restart: unless-stopped
 
   worker-manager:
