@@ -141,7 +141,6 @@ services:
     restart: unless-stopped
 
 volumes:
-  portainer_data:
   data_cache:
   job_manager_data:
   machine_registry_data:
