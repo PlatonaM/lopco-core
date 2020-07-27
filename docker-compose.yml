@@ -146,6 +146,7 @@ volumes:
   machine_registry_data:
   pipeline_registry_data:
   worker_registry_data:
+  protocol_adapter_registry_data:
 
 networks:
   lopco-network:
