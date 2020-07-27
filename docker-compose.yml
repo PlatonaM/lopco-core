@@ -27,8 +27,9 @@ services:
       - TP_4_ReversePath="/pipeline-registry/" "http://pipeline-registry/"
       - TP_5_ReversePath="/worker-registry/" "http://worker-registry/"
     networks:
-      - gw-network
-    restart: unless-stopped
+      - lopco-network
+    labels:
+      - "lopco-type=core"
     restart: unless-stopped
 
   job-manager:
@@ -42,7 +43,9 @@ services:
     environment:
       - CONF_LOGGER_LEVEL=debug
     networks:
-      - gw-network
+      - lopco-network
+    labels:
+      - "lopco-type=core"
     restart: unless-stopped
 
   machine-registry:
@@ -58,7 +61,9 @@ services:
       - CRUDCONF_LOGGER_LEVEL=debug
       - CRUDCONF_ENDPOINT_NAME=machines
     networks:
-      - gw-network
+      - lopco-network
+    labels:
+      - "lopco-type=core"
     restart: unless-stopped
 
   pipeline-registry:
@@ -75,7 +80,9 @@ services:
       - CRUDCONF_ENDPOINT_NAME=pipelines
       - CRUDCONF_ENDPOINT_ALLOW_POST=True
     networks:
-      - gw-network
+      - lopco-network
+    labels:
+      - "lopco-type=core"
     restart: unless-stopped
 
   worker-registry:
@@ -92,7 +99,10 @@ services:
       - CRUDCONF_ENDPOINT_NAME=workers
       - CRUDCONF_ENDPOINT_ALLOW_POST=True
     networks:
-      - gw-network
+      - lopco-network
+    labels:
+      - "lopco-type=core"
+    restart: unless-stopped
     restart: unless-stopped
 
   worker-manager:
@@ -121,7 +131,7 @@ volumes:
   worker_registry_data:
 
 networks:
-  gw-network:
+  lopco-network:
     ipam:
       config:
-        - subnet: 10.30.0.0/16
+        - subnet: 10.20.0.0/16
