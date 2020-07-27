@@ -29,18 +29,6 @@ services:
     networks:
       - gw-network
     restart: unless-stopped
-
-  http-adapter:
-    container_name: http-adapter
-    image: http-adapter
-    expose:
-      - 80
-    volumes:
-      - data_cache:/data_cache
-    environment:
-      - CONF_LOGGER_LEVEL=debug
-    networks:
-      - gw-network
     restart: unless-stopped
 
   job-manager:
