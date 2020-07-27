@@ -21,11 +21,12 @@ services:
       - TP_MaxSpareServers=10
       - TP_StartServers=10
       - TP_Timeout=600
-      - TP_1_ReversePath="/http-adapter/" "http://http-adapter/"
-      - TP_2_ReversePath="/job-manager/" "http://job-manager/"
-      - TP_3_ReversePath="/machine-registry/" "http://machine-registry/"
-      - TP_4_ReversePath="/pipeline-registry/" "http://pipeline-registry/"
-      - TP_5_ReversePath="/worker-registry/" "http://worker-registry/"
+      - TP_1_ReversePath="/job-manager/" "http://job-manager/"
+      - TP_2_ReversePath="/machine-registry/" "http://machine-registry/"
+      - TP_3_ReversePath="/pipeline-registry/" "http://pipeline-registry/"
+      - TP_4_ReversePath="/worker-registry/" "http://worker-registry/"
+      - TP_5_ReversePath="/protocol-adapter-registry/" "http://protocol-adapter-registry/"
+      - TP_6_ReversePath="/deployment-manager/" "http://deployment-manager/"
     networks:
       - lopco-network
     labels:
