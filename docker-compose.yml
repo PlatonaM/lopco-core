@@ -123,21 +123,23 @@ services:
       - "lopco-type=core"
     restart: unless-stopped
 
-  worker-manager:
-    container_name: worker-manager
-    image: worker-manager
+  deployment-manager:
+    container_name: deployment-manager
+    image: deployment-manager
     expose:
       - 80
     environment:
       - CONF_LOGGER_LEVEL=debug
       - CONF_DOCKER_SOCKET=unix://var/run/docker.sock
-      - CONF_DOCKER_NETWORK_NAME=core_gw-network
-      - CONF_DOCKER_RM_CONTAINER=True
+      - CONF_DOCKER_NETWORK_NAME=core_lopco-network
+      - CONF_DOCKER_DISABLE_RM=False
       - CONF_DATACACHE_VOLUME_NAME=core_data_cache
     networks:
-      - gw-network
+      - lopco-network
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "lopco-type=core"
     restart: unless-stopped
 
 volumes:
