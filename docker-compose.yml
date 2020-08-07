@@ -61,6 +61,7 @@ services:
       - CRUDCONF_LOGGER_NAME=machine-registry
       - CRUDCONF_LOGGER_LEVEL=debug
       - CRUDCONF_ENDPOINT_NAME=machines
+      - CRUDCONF_ENDPOINT_FULL_COLLECTION=True
     networks:
       - lopco-network
     labels:
@@ -80,6 +81,7 @@ services:
       - CRUDCONF_LOGGER_LEVEL=debug
       - CRUDCONF_ENDPOINT_NAME=pipelines
       - CRUDCONF_ENDPOINT_ALLOW_POST=True
+      - CRUDCONF_ENDPOINT_FULL_COLLECTION=True
     networks:
       - lopco-network
     labels:
@@ -99,6 +101,7 @@ services:
       - CRUDCONF_LOGGER_LEVEL=debug
       - CRUDCONF_ENDPOINT_NAME=workers
       - CRUDCONF_ENDPOINT_ALLOW_POST=True
+      - CRUDCONF_ENDPOINT_FULL_COLLECTION=True
     networks:
       - lopco-network
     labels:
@@ -118,6 +121,7 @@ services:
       - CRUDCONF_LOGGER_LEVEL=debug
       - CRUDCONF_ENDPOINT_NAME=protocol-adapters
       - CRUDCONF_ENDPOINT_ALLOW_POST=True
+      - CRUDCONF_ENDPOINT_FULL_COLLECTION=True
     networks:
       - lopco-network
     labels:
