@@ -147,6 +147,19 @@ services:
       - "lopco-type=core"
     restart: unless-stopped
 
+  gui:
+    container_name: gui
+    image: gui
+    expose:
+      - 80
+    ports:
+      - 8080:80
+    networks:
+      - lopco-network
+    labels:
+      - "lopco-type=core"
+    restart: unless-stopped
+
 volumes:
   data_cache:
   job_manager_data:
