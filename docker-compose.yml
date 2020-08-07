@@ -36,6 +36,7 @@ services:
   job-manager:
     container_name: job-manager
     image: job-manager
+    build: https://github.com/PlatonaM/lopco-job-manager.git
     expose:
       - 80
     volumes:
@@ -131,6 +132,7 @@ services:
   deployment-manager:
     container_name: deployment-manager
     image: deployment-manager
+    build: https://github.com/PlatonaM/lopco-deployment-manager.git
     expose:
       - 80
     environment:
@@ -150,6 +152,7 @@ services:
   gui:
     container_name: gui
     image: gui
+    build: https://github.com/PlatonaM/lopco-gui.git
     expose:
       - 80
     ports:
