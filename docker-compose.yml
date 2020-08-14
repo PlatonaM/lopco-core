@@ -12,7 +12,7 @@ services:
     environment:
       - TP_User=tinyproxy
       - TP_Group=tinyproxy
-      - TP_ViaProxyName="local-gw"
+      - TP_ViaProxyName="LOPCO-API"
       - TP_Port=8000
       - TP_LogLevel=Info
       - TP_ReverseOnly=Yes
