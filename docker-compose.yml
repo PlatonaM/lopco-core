@@ -3,8 +3,7 @@ version: "3"
 services:
   reverse-proxy:
     container_name: reverse-proxy
-    image: tinyproxy-env-conf
-    build: https://github.com/y-du/tinyproxy-env-conf.git
+    image: platonam/tinyproxy-env-conf:latest
     expose:
       - 8000
     environment:
@@ -33,8 +32,7 @@ services:
 
   job-manager:
     container_name: job-manager
-    image: job-manager
-    build: https://github.com/PlatonaM/lopco-job-manager.git
+    image: platonam/lopco-job-manager:${LOPCO_CORE_ENVIRONMENT}
     expose:
       - 80
     volumes:
@@ -50,8 +48,7 @@ services:
 
   machine-registry:
     container_name: machine-registry
-    image: crud-template-service
-    build: https://github.com/y-du/crud-template-service.git
+    image: ydbuilds/crud-template-service:latest
     expose:
       - 80
     volumes:
@@ -69,8 +66,7 @@ services:
 
   pipeline-registry:
     container_name: pipeline-registry
-    image: crud-template-service
-    build: https://github.com/y-du/crud-template-service.git
+    image: ydbuilds/crud-template-service:latest
     expose:
       - 80
     volumes:
@@ -89,8 +85,7 @@ services:
 
   worker-registry:
     container_name: worker-registry
-    image: crud-template-service
-    build: https://github.com/y-du/crud-template-service.git
+    image: ydbuilds/crud-template-service:latest
     expose:
       - 80
     volumes:
@@ -109,8 +104,7 @@ services:
 
   protocol-adapter-registry:
     container_name: protocol-adapter-registry
-    image: crud-template-service
-    build: https://github.com/y-du/crud-template-service.git
+    image: ydbuilds/crud-template-service:latest
     expose:
       - 80
     volumes:
@@ -129,8 +123,7 @@ services:
 
   deployment-manager:
     container_name: deployment-manager
-    image: deployment-manager
-    build: https://github.com/PlatonaM/lopco-deployment-manager.git
+    image: platonam/lopco-deployment-manager:${LOPCO_CORE_ENVIRONMENT}
     expose:
       - 80
     environment:
@@ -149,8 +142,7 @@ services:
 
   gui:
     container_name: gui
-    image: gui
-    build: https://github.com/PlatonaM/lopco-gui.git
+    image: platonam/lopco-gui:${LOPCO_CORE_ENVIRONMENT}
     expose:
       - 80
     ports:
