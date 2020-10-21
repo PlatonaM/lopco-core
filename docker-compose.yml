@@ -24,7 +24,7 @@ services:
       - TP_4_ReversePath="/worker-registry/" "http://worker-registry/"
       - TP_5_ReversePath="/protocol-adapter-registry/" "http://protocol-adapter-registry/"
       - TP_6_ReversePath="/deployment-manager/" "http://deployment-manager/"
-      - TP_6_ReversePath="/update-manager/" "http://update-manager/"
+      - TP_7_ReversePath="/update-manager/" "http://update-manager/"
     networks:
       - lopco-network
     labels:
