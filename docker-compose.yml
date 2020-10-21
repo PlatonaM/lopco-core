@@ -24,6 +24,7 @@ services:
       - TP_4_ReversePath="/worker-registry/" "http://worker-registry/"
       - TP_5_ReversePath="/protocol-adapter-registry/" "http://protocol-adapter-registry/"
       - TP_6_ReversePath="/deployment-manager/" "http://deployment-manager/"
+      - TP_6_ReversePath="/update-manager/" "http://update-manager/"
     networks:
       - lopco-network
     labels:
@@ -136,6 +137,20 @@ services:
       - lopco-network
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "lopco-type=core"
+    restart: unless-stopped
+
+  update-manager:
+    container_name: update-manager
+    image: platonam/lopco-update-manager:${LOPCO_CORE_ENVIRONMENT}
+    expose:
+      - 80
+    environment:
+      - CONF_LOGGER_LEVEL=${LOPCO_LOG_LEVEL}
+      - CONF_CORE_IMAGES=platonam/tinyproxy-env-conf:latest;platonam/lopco-job-manager:${LOPCO_CORE_ENVIRONMENT};ydbuilds/crud-template-service:latest;platonam/lopco-deployment-manager:${LOPCO_CORE_ENVIRONMENT};platonam/lopco-update-manager:${LOPCO_CORE_ENVIRONMENT};platonam/lopco-gui:${LOPCO_CORE_ENVIRONMENT}
+    networks:
+      - lopco-network
     labels:
       - "lopco-type=core"
     restart: unless-stopped
