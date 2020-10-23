@@ -15,25 +15,21 @@
 #   limitations under the License.
 
 
-hub_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+core_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-conf_file="hub.conf"
+conf_file="core.conf"
 
 conf_vars=(
-    "CC_HUB_ENVIRONMENT=prod"
-    "CC_DOCKER_HUB_API=https://registry-1.docker.io/v2"
-    "CC_DOCKER_HUB_AUTH=https://auth.docker.io/token"
-    "CC_HUB_UPDATER_DELAY=600"
-    "CC_HUB_UPDATER_LOG_LVL=1"
+    "LOPCO_CORE_ENVIRONMENT=latest"
+    "LOPCO_LOG_LEVEL=info"
 )
 
 env_vars=(
-    "CC_HUB_HOST_IP=$(ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)"
-    "CC_HUB_PATH=$hub_dir"
+    "LOPCO_CORE_PATH=$core_dir"
 )
 
 
-installHubEnvLoader() {
+installEnvLoader() {
     g_bashrc="/etc/bash.bashrc"
     line="source /opt/client-connector-hub/load_env.sh"
     if ! grep -qxF "$line" $g_bashrc; then
@@ -46,37 +42,37 @@ $line
 }
 
 
-initHubConf() {
+initConf() {
     echo "creating $conf_file ..."
-    truncate -s 0 $hub_dir/$conf_file
+    truncate -s 0 $core_dir/$conf_file
     for var in "${conf_vars[@]}"; do
-        echo "$var" >> $hub_dir/$conf_file
+        echo "$var" >> $core_dir/$conf_file
     done
 }
 
 
-updateHubConf() {
+updateConf() {
     echo "updating $conf_file ..."
-    truncate -s 0 $hub_dir/$conf_file
+    truncate -s 0 $core_dir/$conf_file
     for var in "${conf_vars[@]}"; do
         var_name=$(echo "$var" | cut -d'=' -f1)
         if [[ -z "${!var_name}" ]]; then
-            echo "$var" >> $hub_dir/$conf_file
+            echo "$var" >> $core_dir/$conf_file
         else
-            echo "$var_name=${!var_name}" >> $hub_dir/$conf_file
+            echo "$var_name=${!var_name}" >> $core_dir/$conf_file
         fi
     done
 }
 
 
-loadHubConf() {
+loadConf() {
     while IFS= read -r line; do
         export "$line"
-    done < $hub_dir/$conf_file
+    done < $core_dir/$conf_file
 }
 
 
-loadHubEnv() {
+loadEnv() {
   for var in "${env_vars[@]}"; do
       export "$var"
   done
@@ -84,18 +80,18 @@ loadHubEnv() {
 
 
 if [[ -z "$1" ]]; then
-    loadHubConf
-    loadHubEnv
+    loadConf
+    loadEnv
 else
     case "$1" in
         install)
-            initHubConf
-            installHubEnvLoader
+            initConf
+            installEnvLoader
             exit 0
             ;;
         update)
-            loadHubConf
-            updateHubConf
+            loadConf
+            updateConf
             exit 0
             ;;
         *)
