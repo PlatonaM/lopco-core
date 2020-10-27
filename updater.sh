@@ -126,8 +126,23 @@ redeployContainer() {
 }
 
 
+updateCore() {
+    for file in .updater_com/*; do
+        if [[ -e "$file" ]] && [[ $(wc -l < "$file") -lt 1 ]]; then
+            wc -l < "$file"
+            srv=$(cat "$file")
+            if redeployContainer $srv; then
+                printf "\n0" >> "$file"
+                echo "($srv) redeploying container successful" | log 1
+                if [[ "$srv" == "update-manager" ]]; then
+                    rm "$file"
                 fi
+            else
+                printf "\n1" >> "$file"
+                echo "($srv) redeploying container failed" | log 3
             fi
+        fi
+    done
 }
 
 
