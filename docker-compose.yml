@@ -151,6 +151,8 @@ services:
       - CONF_CORE_IMAGES=platonam/tinyproxy-env-conf:latest;platonam/lopco-job-manager:${LOPCO_CORE_ENVIRONMENT};ydbuilds/crud-template-service:latest;platonam/lopco-deployment-manager:${LOPCO_CORE_ENVIRONMENT};platonam/lopco-update-manager:${LOPCO_CORE_ENVIRONMENT};platonam/lopco-gui:${LOPCO_CORE_ENVIRONMENT}
     networks:
       - lopco-network
+    volumes:
+      - ./.updater_com:/lopco_core
     labels:
       - "lopco-type=core"
     restart: unless-stopped
