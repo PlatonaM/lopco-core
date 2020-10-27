@@ -38,14 +38,14 @@ Restart=always
 
 [Install]
 WantedBy=default.target
-" > /etc/systemd/system/cc-hub-updater.service
+" > /etc/systemd/system/lopco-updater.service
     if [[ $? -eq 0 ]]; then
-        if chmod 664 /etc/systemd/system/cc-hub-updater.service; then
+        if chmod 664 /etc/systemd/system/lopco-updater.service; then
             echo "successfully created service"
             echo "reloading daemon ..."
             if systemctl daemon-reload; then
                 echo "enabling systemd service ..."
-                if systemctl enable cc-hub-updater.service; then
+                if systemctl enable lopco-updater.service; then
                     echo "successfully enabled service"
                     return 0
                 else
@@ -65,7 +65,7 @@ WantedBy=default.target
 
 
 log() {
-    if [ $1 -lt $CC_HUB_UPDATER_LOG_LVL ]; then
+    if [ $1 -lt $LOPCO_UPDATER_LOG_LVL ]; then
         return 0
     fi
     logger=""
@@ -75,10 +75,10 @@ log() {
     first=1
     while read -r line; do
         if [ "$first" -eq "1" ]; then
-            echo "[$(date +"%m.%d.%Y %I:%M:%S %p")]$logger $line" >> $CC_HUB_PATH/logs/updater.log 2>&1
+            echo "[$(date +"%m.%d.%Y %I:%M:%S %p")]$logger $line" >> $LOPCO_CORE_PATH/logs/updater.log 2>&1
             first=0
         else
-            echo "$line" >> $CC_HUB_PATH/logs/updater.log 2>&1
+            echo "$line" >> $LOPCO_CORE_PATH/logs/updater.log 2>&1
         fi
     done
 }
@@ -94,27 +94,27 @@ rotateLog() {
 
 
 updateSelf() {
-    echo "(hub-updater) checking for updates ..." | log 1
+    echo "(core-updater) checking for updates ..." | log 1
     update_result=$(git remote update 3>&1 1>&2 2>&3 >/dev/null)
     if ! [[ $update_result = *"fatal"* ]] || ! [[ $update_result = *"error"* ]]; then
         status_result=$(git status)
         if [[ $status_result = *"behind"* ]]; then
-            echo "(hub-updater) downloading and applying updates ..." | log 1
+            echo "(core-updater) downloading and applying updates ..." | log 1
             pull_result=$(git pull 3>&1 1>&2 2>&3 >/dev/null)
             if ! [[ $pull_result = *"fatal"* ]] || ! [[ $pull_result = *"error"* ]]; then
-                echo "(hub-updater) $(./load_env.sh update)" | log 1
-                echo "(hub-updater) update success" | log 1
+                echo "(core-updater) $(./load_env.sh update)" | log 1
+                echo "(core-updater) update success" | log 1
                 return 0
             else
-                echo "(hub-updater) $pull_result" | log 3
+                echo "(core-updater) $pull_result" | log 3
                 return 1
             fi
         else
-            echo "(hub-updater) up-to-date" | log 1
+            echo "(core-updater) up-to-date" | log 1
             return 2
         fi
     else
-        echo "(hub-updater) checking for updates - failed" | log 3
+        echo "(core-updater) checking for updates - failed" | log 3
         return 1
     fi
 }
@@ -222,11 +222,11 @@ initCheck() {
 
 
 strtMsg() {
-    echo "***************** starting client-connector-hub-updater *****************" | log 4
-    echo "running in: '$CC_HUB_PATH'" | log 4
-    echo "check every: '$CC_HUB_UPDATER_DELAY' seconds" | log 4
-    echo "environment: '$CC_HUB_ENVIRONMENT'" | log 4
-    echo "log level: '${log_lvl[$CC_HUB_UPDATER_LOG_LVL]}'" | log 4
+    echo "***************** starting lopco-core-updater *****************" | log 4
+    echo "running in: '$LOPCO_CORE_PATH'" | log 4
+    echo "check every: '$LOPCO_UPDATER_DELAY' seconds" | log 4
+    echo "environment: '$LOPCO_CORE_ENVIRONMENT'" | log 4
+    echo "log level: '${log_lvl[$LOPCO_UPDATER_LOG_LVL]}'" | log 4
     echo "PID: '$$'" | log 4
 }
 
