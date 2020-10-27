@@ -121,6 +121,8 @@ updateSelf() {
 
 
 redeployContainer() {
+    docker-compose --no-ansi up -d "$1" 2>&1 | log 0
+    return ${PIPESTATUS[0]}
 }
 
 
