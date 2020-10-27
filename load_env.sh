@@ -22,6 +22,8 @@ conf_file="core.conf"
 conf_vars=(
     "LOPCO_CORE_ENVIRONMENT=latest"
     "LOPCO_LOG_LEVEL=info"
+    "LOPCO_UPDATER_DELAY=5"
+    "LOPCO_UPDATER_LOG_LVL=1"
 )
 
 env_vars=(
