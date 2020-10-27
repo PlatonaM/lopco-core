@@ -152,7 +152,7 @@ if [[ -z "$1" ]]; then
     initCheck
     strtMsg
     while true; do
-        sleep $CC_HUB_UPDATER_DELAY
+        sleep $LOPCO_UPDATER_DELAY
         rotateLog
         if updateSelf; then
             echo "(hub-updater) restarting ..." | log 1
@@ -163,7 +163,7 @@ if [[ -z "$1" ]]; then
     exit 0
 else
     if [[ $1 == "install" ]]; then
-        echo "installing client-connector-hub-updater ..."
+        echo "installing lopco-core-updater ..."
         ./load_env.sh install
         if installUpdaterService; then
             echo "installation successful"
