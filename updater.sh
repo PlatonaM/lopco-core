@@ -172,10 +172,10 @@ if [[ -z "$1" ]]; then
         sleep $LOPCO_UPDATER_DELAY
         rotateLog
         if updateSelf; then
-            echo "(hub-updater) restarting ..." | log 1
+            echo "(core-updater) restarting ..." | log 1
             break
         fi
-        updateHub
+        updateCore
     done
     exit 0
 else
