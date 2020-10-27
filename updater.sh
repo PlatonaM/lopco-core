@@ -120,103 +120,18 @@ updateSelf() {
 }
 
 
-pullImage() {
-    docker pull "$1" 2>&1 | log 0
-    return ${PIPESTATUS[0]}
-}
-
-
-containerRunningState() {
-    status=$(curl -G --silent --unix-socket "/var/run/docker.sock" --data-urlencode 'filters={"name": ["'$1'"]}' "http:/v1.40/containers/json" | jq -r '.[0].State')
-    if [[ $status = "running" ]]; then
-        return 0
-    fi
-    return 1
-}
-
-
 redeployContainer() {
-    if containerRunningState "$1"; then
-        docker-compose --no-ansi up -d "$1" 2>&1 | log 0
-        return ${PIPESTATUS[0]}
-    else
-        docker-compose --no-ansi up --no-start "$1" 2>&1 | log 0
-        return ${PIPESTATUS[0]}
-    fi
-    return 1
 }
 
 
-getToken() {
-    curl --silent "$CC_DOCKER_HUB_AUTH?scope=repository:$1:pull&service=registry.docker.io" | jq -r '.token'
-}
-
-
-updateHub() {
-    if curl --silent --fail --unix-socket "/var/run/docker.sock" "http:/v1.40/info" > /dev/null; then
-        echo "(hub-updater) checking for images to update ..." | log 1
-        images=$(curl --silent --unix-socket "/var/run/docker.sock" "http:/v1.40/images/json")
-        num=$(echo $images | jq -r 'length')
-        for ((i=0; i<=$num-1; i++)); do
-            img_info=$(echo $images | jq -r ".[$i].RepoTags[0]")
-            img_hash=$(echo $images | jq -r ".[$i].Id")
-            img=$(echo $img_info | cut -d':' -f1)
-            img_name=$(echo $img_info | cut -d'/' -f2 | cut -d':' -f1)
-            img_tag=$(echo $img_info | cut -d':' -f2)
-            if grep -q "$img" $CC_HUB_PATH/docker-compose.yml; then
-                if curl --silent --fail "$CC_DOCKER_HUB_API" > /dev/null; then
-                    echo "($img_name) checking for updates ..." | log 1
-                    token=$(getToken $img)
-                    remote_img_hash=$(curl --silent --header "Accept: application/vnd.docker.distribution.manifest.v2+json" --header "Authorization: Bearer $token" "$CC_DOCKER_HUB_API/$img/manifests/$img_tag" | jq -r '.config.digest')
-                    if ! [[ $remote_img_hash == "null" ]]; then
-                        if ! [ "$img_hash" = "$remote_img_hash" ]; then
-                            echo "($img_name) pulling new image ..." | log 1
-                            if pullImage "$img_info"; then
-                                echo "($img_name) pulling new image successful" | log 1
-                                echo "($img_name) redeploying container ..." | log 1
-                                if redeployContainer $img_name; then
-                                    echo "($img_name) redeploying container successful" | log 1
-                                    docker image prune -f > /dev/null 2>&1
-                                else
-                                    echo "($img_name) redeploying container failed" | log 3
-                                fi
-                            else
-                                echo "($img_name) pulling new image failed" | log 3
-                            fi
-                        else
-                            echo "($img_name) up-to-date" | log 1
-                        fi
-                    else
-                      echo "($img_name) retrieving remote hash failed" | log 3
-                    fi
-                else
-                    echo "($img_name) can't reach docker hub '$CC_DOCKER_HUB_API'" | log 3
                 fi
             fi
-        done
-        return 0
-    else
-      echo "(hub-updater) docker engine not running" | log 3
-      return 1
-    fi
 }
 
 
 initCheck() {
     if [ ! -d "logs" ]; then
         mkdir logs
-    fi
-    if ! command -v jq >/dev/null 2>&1; then
-        echo "dependency 'jq' not installed" | log 3
-        exit 1
-    fi
-    if ! command -v truncate >/dev/null 2>&1; then
-        echo "dependency 'truncate' not installed" | log 3
-        exit 1
-    fi
-    if ! command -v ip >/dev/null 2>&1; then
-        echo "dependency 'ip' not installed"
-        exit 1
     fi
 }
 
