@@ -167,6 +167,18 @@ if [[ -z "$1" ]]; then
     source ./load_env.sh
     initCheck
     strtMsg
+    if [[ -f .rd_flag ]]; then
+        echo "(core-updater) redeploying containers ..." | log 1
+        docker-compose --no-ansi up -d 2>&1 | log 0
+        if ${PIPESTATUS[0]}; then
+            echo "(core-updater) redeploying containers successful" | log 1
+            rm .rd_flag
+        else
+            echo "(core-updater) redeploying containers failed" | log 3
+            echo "(core-updater) restarting ..." | log 1
+            exit 0
+        fi
+    fi
     while true; do
         sleep $LOPCO_UPDATER_DELAY
         rotateLog
