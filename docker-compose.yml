@@ -151,6 +151,12 @@ services:
     environment:
       - CONF_LOGGER_LEVEL=${LOPCO_LOG_LEVEL}
       - CONF_CORE_IMAGES=platonam/tinyproxy-env-conf:latest;platonam/lopco-job-manager:${LOPCO_CORE_ENVIRONMENT};ydbuilds/crud-template-service:latest;platonam/lopco-deployment-manager:${LOPCO_CORE_ENVIRONMENT};platonam/lopco-update-manager:${LOPCO_CORE_ENVIRONMENT};platonam/lopco-gui:${LOPCO_CORE_ENVIRONMENT}
+      - CONF_UPDATE_SECOND=${LOPCO_UM_UPDATE_SECOND}
+      - CONF_UPDATE_MINUTE=${LOPCO_UM_UPDATE_MINUTE}
+      - CONF_UPDATE_HOUR=${LOPCO_UM_UPDATE_HOUR}
+      - CONF_UPDATE_INTERVAL=${LOPCO_UM_UPDATE_INTERVAL}
+      - CONF_CORE_DELAY=${LOPCO_UM_CORE_DELAY}
+      - CONF_CORE_TIMEOUT=${LOPCO_UM_CORE_TIMEOUT}
     networks:
       - lopco-network
     volumes:
