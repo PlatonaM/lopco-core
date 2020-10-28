@@ -3,7 +3,7 @@ version: "3"
 services:
   lopco-reverse-proxy:
     container_name: reverse-proxy
-    image: platonam/tinyproxy-env-conf:latest
+    image: platonam/lopco-reverse-proxy:latest
     expose:
       - 8000
     environment:
@@ -49,7 +49,7 @@ services:
 
   lopco-machine-registry:
     container_name: machine-registry
-    image: ydbuilds/crud-template-service:latest
+    image: platonam/lopco-machine-registry:latest
     expose:
       - 80
     volumes:
@@ -67,7 +67,7 @@ services:
 
   lopco-pipeline-registry:
     container_name: pipeline-registry
-    image: ydbuilds/crud-template-service:latest
+    image: platonam/lopco-pipeline-registry:latest
     expose:
       - 80
     volumes:
@@ -86,7 +86,7 @@ services:
 
   lopco-worker-registry:
     container_name: worker-registry
-    image: ydbuilds/crud-template-service:latest
+    image: platonam/lopco-worker-registry:latest
     expose:
       - 80
     volumes:
@@ -105,7 +105,7 @@ services:
 
   lopco-protocol-adapter-registry:
     container_name: protocol-adapter-registry
-    image: ydbuilds/crud-template-service:latest
+    image: platonam/lopco-protocol-adapter-registry:latest
     expose:
       - 80
     volumes:
