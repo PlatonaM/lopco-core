@@ -128,8 +128,7 @@ redeployContainer() {
 
 updateCore() {
     for file in .updater_com/*; do
-        if [[ -e "$file" ]] && [[ $(wc -l < "$file") -lt 1 ]]; then
-            wc -l < "$file"
+        if [[ -f "$file" ]] && [[ $(wc -l < "$file") -lt 1 ]]; then
             srv=$(cat "$file")
             if redeployContainer $srv; then
                 printf "\n0" >> "$file"
