@@ -41,6 +41,8 @@ services:
       - data_cache:/data_cache
     environment:
       - CONF_LOGGER_LEVEL=${LOPCO_LOG_LEVEL}
+      - CONF_JOBS_CHECK=${LOPCO_JM_JOBS_CHECK}
+      - CONF_JOBS_MAX_NUM=${LOPCO_JM_JOBS_MAX_NUM}
     networks:
       - lopco-network
     labels:
