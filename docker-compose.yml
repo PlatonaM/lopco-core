@@ -190,4 +190,4 @@ networks:
   lopco-network:
     ipam:
       config:
-        - subnet: 10.20.0.0/16
+        - subnet: ${LOPCO_SUBNET}
