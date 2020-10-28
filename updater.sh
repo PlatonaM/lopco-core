@@ -94,27 +94,27 @@ rotateLog() {
 
 
 updateSelf() {
-    echo "(core-updater) checking for updates ..." | log 1
+    echo "checking for updates ..." | log 1
     update_result=$(git remote update 3>&1 1>&2 2>&3 >/dev/null)
     if ! [[ $update_result = *"fatal"* ]] || ! [[ $update_result = *"error"* ]]; then
         status_result=$(git status)
         if [[ $status_result = *"behind"* ]]; then
-            echo "(core-updater) downloading and applying updates ..." | log 1
+            echo "downloading and applying updates ..." | log 1
             pull_result=$(git pull 3>&1 1>&2 2>&3 >/dev/null)
             if ! [[ $pull_result = *"fatal"* ]] || ! [[ $pull_result = *"error"* ]]; then
-                echo "(core-updater) $(./load_env.sh update)" | log 1
-                echo "(core-updater) update success" | log 1
+                echo "$(./load_env.sh update)" | log 1
+                echo "update success" | log 1
                 return 0
             else
-                echo "(core-updater) $pull_result" | log 3
+                echo "$pull_result" | log 3
                 return 1
             fi
         else
-            echo "(core-updater) up-to-date" | log 1
+            echo "up-to-date" | log 1
             return 2
         fi
     else
-        echo "(core-updater) checking for updates - failed" | log 3
+        echo "checking for updates - failed" | log 3
         return 1
     fi
 }
@@ -168,14 +168,14 @@ if [[ -z "$1" ]]; then
     initCheck
     strtMsg
     if [[ -f .rd_flag ]]; then
-        echo "(core-updater) redeploying containers ..." | log 1
+        echo "redeploying containers ..." | log 1
         docker-compose --no-ansi up -d 2>&1 | log 0
         if [[ ${PIPESTATUS[0]} -eq 0 ]]; then
-            echo "(core-updater) redeploying containers successful" | log 1
+            echo "redeploying containers successful" | log 1
             rm .rd_flag
         else
-            echo "(core-updater) redeploying containers failed" | log 3
-            echo "(core-updater) restarting ..." | log 1
+            echo "redeploying containers failed" | log 3
+            echo "restarting ..." | log 1
             exit 0
         fi
     fi
@@ -184,9 +184,9 @@ if [[ -z "$1" ]]; then
         rotateLog
         if updateSelf; then
             if touch .rd_flag; then
-                echo "(core-updater) containers will be redeployed after restart ..." | log 1
+                echo "containers will be redeployed after restart ..." | log 1
             fi
-            echo "(core-updater) restarting ..." | log 1
+            echo "restarting ..." | log 1
             break
         fi
         updateCore
