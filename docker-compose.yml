@@ -132,9 +132,9 @@ services:
     environment:
       - CONF_LOGGER_LEVEL=${LOPCO_LOG_LEVEL}
       - CONF_DOCKER_SOCKET=unix://var/run/docker.sock
-      - CONF_DOCKER_NETWORK_NAME=core_lopco-network
-      - CONF_DOCKER_DISABLE_RM=False
-      - CONF_DATACACHE_VOLUME_NAME=core_data_cache
+      - CONF_DOCKER_NETWORK_NAME=${LOPCO_CORE_DIR_NAME}_lopco-network
+      - CONF_DOCKER_DISABLE_RM=${LOPCO_DM_DOCKER_DISABLE_RM}
+      - CONF_DATACACHE_VOLUME_NAME=${LOPCO_CORE_DIR_NAME}_data_cache
     networks:
       - lopco-network
     volumes:
