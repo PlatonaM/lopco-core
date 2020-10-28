@@ -183,6 +183,9 @@ if [[ -z "$1" ]]; then
         sleep $LOPCO_UPDATER_DELAY
         rotateLog
         if updateSelf; then
+            if touch .rd_flag; then
+                echo "(core-updater) containers will be redeployed after restart ..." | log 1
+            fi
             echo "(core-updater) restarting ..." | log 1
             break
         fi
