@@ -170,7 +170,7 @@ if [[ -z "$1" ]]; then
     if [[ -f .rd_flag ]]; then
         echo "(core-updater) redeploying containers ..." | log 1
         docker-compose --no-ansi up -d 2>&1 | log 0
-        if ${PIPESTATUS[0]}; then
+        if [[ ${PIPESTATUS[0]} -eq 0 ]]; then
             echo "(core-updater) redeploying containers successful" | log 1
             rm .rd_flag
         else
