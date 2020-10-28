@@ -37,6 +37,7 @@ conf_vars=(
 
 env_vars=(
     "LOPCO_CORE_PATH=$core_dir"
+    "LOPCO_CORE_DIR_NAME=${PWD##*/}"
 )
 
 
