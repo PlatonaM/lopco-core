@@ -179,15 +179,20 @@ if [[ -z "$1" ]]; then
             exit 0
         fi
     fi
+    last_update=$(date +%s)
     while true; do
         sleep $LOPCO_UPDATER_DELAY
         rotateLog
-        if updateSelf; then
-            if touch .rd_flag; then
-                echo "containers will be redeployed after restart ..." | log 1
+        now=$(date +%s)
+        if [[ $(( now - last_update )) -gt $LOPCO_SELF_UPDATE_DELAY ]]; then
+            if updateSelf; then
+                if touch .rd_flag; then
+                    echo "containers will be redeployed after restart ..." | log 1
+                fi
+                echo "restarting ..." | log 1
+                break
             fi
-            echo "restarting ..." | log 1
-            break
+            last_update=$now
         fi
         updateCore
     done
