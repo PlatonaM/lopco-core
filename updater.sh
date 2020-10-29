@@ -156,6 +156,7 @@ strtMsg() {
     echo "***************** starting lopco-core-updater *****************" | log 4
     echo "running in: '$LOPCO_CORE_PATH'" | log 4
     echo "check every: '$LOPCO_UPDATER_DELAY' seconds" | log 4
+    echo "check self every: '$LOPCO_SELF_UPDATE_DELAY' seconds" | log 4
     echo "environment: '$LOPCO_CORE_ENVIRONMENT'" | log 4
     echo "log level: '${log_lvl[$LOPCO_UPDATER_LOG_LVL]}'" | log 4
     echo "PID: '$$'" | log 4
