@@ -25,6 +25,7 @@ services:
       - TP_5_ReversePath="/protocol-adapter-registry/" "http://protocol-adapter-registry/"
       - TP_6_ReversePath="/deployment-manager/" "http://deployment-manager/"
       - TP_7_ReversePath="/update-manager/" "http://update-manager/"
+      - TP_8_ReversePath="/backup-manager/" "http://backup-manager/"
     networks:
       - lopco-network
     labels:
