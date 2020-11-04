@@ -165,6 +165,25 @@ services:
       - "lopco-type=core"
     restart: unless-stopped
 
+  lopco-backup-manager:
+    container_name: backup-manager
+    image: platonam/lopco-backup-manager:${LOPCO_CORE_ENVIRONMENT}
+    expose:
+      - 80
+    environment:
+      - CONF_LOGGER_LEVEL=${LOPCO_LOG_LEVEL}
+      - CONF_BACKUP_SECOND=${LOPCO_BM_BACKUP_SECOND}
+      - CONF_BACKUP_MINUTE=${LOPCO_BM_BACKUP_MINUTE}
+      - CONF_BACKUPE_HOUR=${LOPCO_BM_BACKUP_HOUR}
+      - CONF_BACKUP_INTERVAL=${LOPCO_BM_BACKUP_INTERVAL}
+    networks:
+      - lopco-network
+    volumes:
+      - backup_manager_data:/exports
+    labels:
+      - "lopco-type=core"
+    restart: unless-stopped
+
   lopco-gui:
     container_name: gui
     image: platonam/lopco-gui:${LOPCO_CORE_ENVIRONMENT}
@@ -185,6 +204,7 @@ volumes:
   pipeline_registry_data:
   worker_registry_data:
   protocol_adapter_registry_data:
+  backup_manager_data:
 
 networks:
   lopco-network:
