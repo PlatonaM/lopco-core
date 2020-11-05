@@ -152,6 +152,7 @@ services:
     environment:
       - CONF_LOGGER_LEVEL=${LOPCO_LOG_LEVEL}
       - CONF_CORE_IMAGES=platonam/lopco-reverse-proxy:latest;platonam/lopco-job-manager:${LOPCO_CORE_ENVIRONMENT};platonam/lopco-machine-registry:latest;platonam/lopco-pipeline-registry:latest;platonam/lopco-worker-registry:latest;platonam/lopco-protocol-adapter-registry:latest;platonam/lopco-deployment-manager:${LOPCO_CORE_ENVIRONMENT};platonam/lopco-update-manager:${LOPCO_CORE_ENVIRONMENT};platonam/lopco-gui:${LOPCO_CORE_ENVIRONMENT}
+      - CONF_UPDATE_AUTOMATIC=${LOPCO_UM_UPDATE_AUTOMATIC}
       - CONF_UPDATE_SECOND=${LOPCO_UM_UPDATE_SECOND}
       - CONF_UPDATE_MINUTE=${LOPCO_UM_UPDATE_MINUTE}
       - CONF_UPDATE_HOUR=${LOPCO_UM_UPDATE_HOUR}
