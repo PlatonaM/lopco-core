@@ -182,7 +182,7 @@ services:
     networks:
       - lopco-network
     volumes:
-      - backup_manager_data:/exports
+      - backup_manager_data:/backups
     labels:
       - "lopco-type=core"
     restart: unless-stopped
