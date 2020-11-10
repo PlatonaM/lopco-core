@@ -194,7 +194,7 @@ services:
     expose:
       - 80
     ports:
-      - 8080:80
+      - ${LOPCO_GUI_PORT}:80
     networks:
       - lopco-network
     labels:
