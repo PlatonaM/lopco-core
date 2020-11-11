@@ -43,7 +43,7 @@ This repository contains the [core files](#lopco-core-files) required to deploy,
                  |
                  |--- ...
 
-#### Installation
+#### LOPCO Core Installation
 
 Clone this repository to a preferred location (for example `/opt/lopco-core`):
 
