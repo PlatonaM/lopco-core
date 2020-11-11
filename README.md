@@ -2,7 +2,7 @@
 
 LOPCO (LOcal Preprocessing COmponent) provides data processing automation via user defined pipelines and workers. Integration of LOPCO with local systems can be achieved with protocol-adapters. LOPCO provides a runtime environment, mechanisms and APIs for developers implementing workers or protocol-adapters.  
 
-This repository contains the core files required to deploy, update and configure LOPCO Services.
+This repository contains the [core files](#lopco-core-files) required to deploy, update and configure LOPCO [services](#lopco-services).
 
 #### LOPCO Services
 
