@@ -1,14 +1,14 @@
-#### Architecture
 ## LOPCO Core
 
 LOPCO (LOcal Preprocessing COmponent) provides automatic processing of data via user defined pipelines and workers. Integration of LOPCO with local systems can be achieved with protocol-adapters. LOPCO provides a runtime environment, mechanisms and APIs for developers implementing workers or protocol-adapters.  
 
 This repository contains the core files required to deploy, update and configure LOPCO Services.
 
+#### LOPCO Architecture
 
 ![LOPCO architecture](arch.png)
 
-#### Services
+#### LOPCO Services
 
 - [Job-Manager](https://github.com/PlatonaM/lopco-job-manager)
 - [Deployment-Manager](https://github.com/PlatonaM/lopco-deployment-manager)
@@ -21,7 +21,7 @@ This repository contains the core files required to deploy, update and configure
 - [API-Gateway](https://github.com/PlatonaM/tinyproxy-env-conf)
 - [GUI](https://github.com/PlatonaM/lopco-gui)
 
-#### Host Components
+#### LOPCO Core Host Components
 
     lopco-core
         |
