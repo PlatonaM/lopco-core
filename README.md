@@ -1,4 +1,10 @@
 #### Architecture
+## LOPCO Core
+
+LOPCO (LOcal Preprocessing COmponent) provides automatic processing of data via user defined pipelines and workers. Integration of LOPCO with local systems can be achieved with protocol-adapters. LOPCO provides a runtime environment, mechanisms and APIs for developers implementing workers or protocol-adapters.  
+
+This repository contains the core files required to deploy, update and configure LOPCO Services.
+
 
 ![LOPCO architecture](arch.png)
 
