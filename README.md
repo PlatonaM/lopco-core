@@ -21,7 +21,7 @@ This repository contains the core files required to deploy, update and configure
 
 ![LOPCO architecture](arch.png)
 
-#### LOPCO Core Host Components
+#### LOPCO Core
 
     lopco-core
         |
