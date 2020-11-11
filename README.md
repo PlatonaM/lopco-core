@@ -23,7 +23,7 @@ This repository contains the [core files](#lopco-core-files) required to deploy,
 
 #### LOPCO Core Files
 
-    lopco-core
+    lopco-core/
         |
         |--- docker-compose.yml
         |
@@ -33,12 +33,12 @@ This repository contains the [core files](#lopco-core-files) required to deploy,
         |
         |--- core.conf
         |
-        |--- logs
+        |--- logs/
         |        |
         |        |--- updater.log
         |        |
         |        |--- ...
         |
-        |--- .updater_com
+        |--- .updater_com/
                  |
                  |--- ...
