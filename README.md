@@ -51,7 +51,7 @@ Clone this repository to a preferred location (for example `/opt/lopco-core`):
 
 Navigate to the repository you just created and choose **one** of the options below.
 
- - Install automatic updates and config loader:
+ - Install automatic core updates and config loader:
 	 - With root privileges run `./updater.sh install`.
  - Install config loader only:
 	 - With root privileges run `./load_env.sh install`.
