@@ -45,6 +45,13 @@ This repository contains the [core files](#lopco-core-files) required to deploy,
 
 #### LOPCO Core Installation
 
+Requirements:
+ - bash
+ - git
+ - docker
+ - docker-compose
+ - systemd
+
 Clone this repository to a preferred location (for example `/opt/lopco-core`):
 
 `git clone https://github.com/PlatonaM/lopco-core.git`
