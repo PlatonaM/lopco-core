@@ -42,3 +42,18 @@ This repository contains the [core files](#lopco-core-files) required to deploy,
         |--- .updater_com/
                  |
                  |--- ...
+
+#### Installation
+
+Clone this repository to a preferred location (for example `/opt/lopco-core`):
+
+`git clone https://github.com/PlatonaM/lopco-core.git`
+
+Navigate to the repository you just created and choose **one** of the options below.
+
+ - Install automatic updates and config loader:
+	 - With root privileges run `./updater.sh install`.
+ - Install config loader only:
+	 - With root privileges run `./load_env.sh install`.
+
+Reboot or reload your session for changes to take effect.
