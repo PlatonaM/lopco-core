@@ -95,7 +95,7 @@ The LOPCO services and core updater can be configured via the `core.conf` file:
 
 #### Deploy LOPCO Services
 
-To deploy the LOPCO [services](#lopco-services) go to the [core installation dictionary](#lopco-core-installation) and issue the following command:
+To deploy the LOPCO [services](#lopco-services) go to the [core installation dictionary](#lopco-core-installation) and with root privileges issue the following command:
 
     ./updater.sh deploy
 
