@@ -92,3 +92,11 @@ The LOPCO services and core updater can be configured via the `core.conf` file:
  - `LOPCO_BM_AUTOBACKUP_INTERVAL` if the above options are set to 0 the [Backup-Manager](https://github.com/PlatonaM/lopco-backup-manager) service will create backups in the given interval (seconds).
  - `LOPCO_BM_AUTOBACKUP_MAX_DAYS` set the number of days automatic backups are retained by the [Backup-Manager](https://github.com/PlatonaM/lopco-backup-manager) service.
  - `LOPCO_GUI_PORT` port the [GUI](https://github.com/PlatonaM/lopco-gui) service will be available on.
+
+#### Deploy LOPCO Services
+
+To deploy the LOPCO [services](#lopco-services) go to the [core installation dictionary](#lopco-core-installation) and issue the following command:
+
+    ./updater.sh deploy
+
+If any of the [config options](#configuration) change, the above command must be issued again to redeploy the affected services.
