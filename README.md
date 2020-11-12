@@ -54,7 +54,7 @@ Requirements:
 
 Clone this repository to a preferred location (for example `/opt/lopco-core`):
 
-`git clone https://github.com/PlatonaM/lopco-core.git`
+    git clone https://github.com/PlatonaM/lopco-core.git
 
 Navigate to the repository you just created and choose **one** of the options below.
 
