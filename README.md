@@ -4,6 +4,8 @@ LOPCO (LOcal Preprocessing COmponent) provides data processing automation via us
 
 This repository contains the [core files](#lopco-core-files) required to deploy, update and configure LOPCO [services](#lopco-services).
 
+---
+
 #### LOPCO Services
 
 - [Job-Manager](https://github.com/PlatonaM/lopco-job-manager)
@@ -17,9 +19,13 @@ This repository contains the [core files](#lopco-core-files) required to deploy,
 - [API-Gateway](https://github.com/PlatonaM/tinyproxy-env-conf)
 - [GUI](https://github.com/PlatonaM/lopco-gui)
 
+---
+
 #### LOPCO Architecture
 
 ![LOPCO architecture](arch.png)
+
+---
 
 #### LOPCO Core Files
 
@@ -43,6 +49,8 @@ This repository contains the [core files](#lopco-core-files) required to deploy,
                  |
                  |--- ...
 
+---
+
 #### LOPCO Core Installation
 
 Requirements:
@@ -64,6 +72,8 @@ Navigate to the repository you just created and choose **one** of the options be
 	 - With root privileges run `./load_env.sh install`.
 
 Reboot or reload your session for changes to take effect.
+
+---
 
 #### Configuration
 
@@ -92,6 +102,8 @@ The LOPCO services and core updater can be configured via the `core.conf` file:
  - `LOPCO_BM_AUTOBACKUP_INTERVAL` if the above options are set to 0 the [Backup-Manager](https://github.com/PlatonaM/lopco-backup-manager) service will create backups in the given interval (seconds).
  - `LOPCO_BM_AUTOBACKUP_MAX_DAYS` set the number of days automatic backups are retained by the [Backup-Manager](https://github.com/PlatonaM/lopco-backup-manager) service.
  - `LOPCO_GUI_PORT` port the [GUI](https://github.com/PlatonaM/lopco-gui) service will be available on.
+
+---
 
 #### Deploy LOPCO Services
 
