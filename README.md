@@ -77,7 +77,7 @@ Reboot or reload your session for changes to take effect.
 
 #### Configuration
 
-The and core updater and LOPCO services can be configured via the `core.conf` file:
+The core updater and LOPCO services can be configured via the `core.conf` file:
 
  - `LOPCO_CORE_ENVIRONMENT` set to either `dev` for developemnt branch or `latest` for stable branch.
  - `LOPCO_LOG_LEVEL` set logging level for LOPCO [services](#lopco-services). (`debug`, `info`, `warning`, `error`)
