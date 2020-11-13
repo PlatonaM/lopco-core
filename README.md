@@ -80,9 +80,9 @@ The core updater and LOPCO services can be configured via the `core.conf` file:
  - `LOPCO_CORE_ENVIRONMENT` set to either `dev` for developemnt branch or `latest` for stable branch.
  - `LOPCO_LOG_LEVEL` set logging level for LOPCO [services](#lopco-services). (`debug`, `info`, `warning`, `error`)
  - `LOPCO_SUBNET` define the subnet of the docker-network. All LOPCO [services](#lopco-services), workers and protocol-adapters reside in this network.
- - `LOPCO_UPDATER_DELAY` determine how often (in seconds) the core updater checks if a LOPCO [service](#lopco-services) must be redeployed after it has been updated by the user.
- - `LOPCO_UPDATER_LOG_LVL` set logging level for core updater. (`0`: debug, `1`: info, `2`: warning, `3`: error)
- - `LOPCO_SELF_UPDATE_DELAY` set how often the [core files](#lopco-core-files) will be updated in seconds.
+ - `LOPCO_UPDATER_DELAY` determine how often (in seconds) the core updater checks if a LOPCO [service](#lopco-services) must be redeployed after it has been updated by the user. (Restart the lopco-updater.service for changes to take affect)
+ - `LOPCO_UPDATER_LOG_LVL` set logging level for core updater. (`0`: debug, `1`: info, `2`: warning, `3`: error) (Restart the lopco-updater.service for changes to take affect)
+ - `LOPCO_SELF_UPDATE_DELAY` set how often the [core files](#lopco-core-files) will be updated in seconds. (Restart the lopco-updater.service for changes to take affect)
  - `LOPCO_UM_UPDATE_AUTOMATIC` enable `True` or disable `False` automatic checks for updates by the [Update-Manager](https://github.com/PlatonaM/lopco-update-manager) service.
  - `LOPCO_UM_UPDATE_SECOND` set the seconds (0-59) of the time when the [Update-Manager](https://github.com/PlatonaM/lopco-update-manager) service will check for updates.
  - `LOPCO_UM_UPDATE_MINUTE` set the minutes (0-59) of the time when the [Update-Manager](https://github.com/PlatonaM/lopco-update-manager) service will check for updates.
