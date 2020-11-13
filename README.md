@@ -110,3 +110,23 @@ To deploy the LOPCO [services](#lopco-services) go to the [core installation dic
     ./updater.sh deploy
 
 If any of the [config options](#configuration) change, the above command must be issued again to redeploy the affected services.
+
+---
+
+#### LOPCO Pipelines
+
+Pipelines are reusable blueprints for automating data processing tasks. A pipeline is composed of stages, which in turn are executed by workers.
+
+![LOPCO pipelines](pipelines.png)
+
+Users can develop their own workers to enable tailored solutions that meet heterogeneous requirements.
+
+Some example workers can be found here:
+ - [lopco-xlsx-to-csv-worker](https://github.com/PlatonaM/lopco-xlsx-to-csv-worker)
+ - [lopco-trim-csv-worker](https://github.com/PlatonaM/lopco-trim-csv-worker)
+ - [lopco-split-csv-worker](https://github.com/PlatonaM/lopco-split-csv-worker)
+ - [lopco-upload-csv-worker](https://github.com/PlatonaM/lopco-upload-csv-worker)
+
+Below is an example of how a dataset can be manipulated utilizing the above example workers in a pipeline:
+
+![LOPCO pipelines example](example.png)
