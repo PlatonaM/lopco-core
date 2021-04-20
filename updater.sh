@@ -241,15 +241,19 @@ else
                     exit 1
                 fi
             else
-              if docker-compose pull "$2"; then
-                  echo
-                  echo "pulling image successful"
-                  exit 0
-              else
-                  echo
-                  echo "pulling image failed"
-                  exit 1
-              fi
+                echo "pulling $2 image ..."
+                echo
+                echo "environment: '$LOPCO_CORE_ENVIRONMENT'"
+                echo
+                if docker-compose pull "$2"; then
+                    echo
+                    echo "pulling image successful"
+                    exit 0
+                else
+                    echo
+                    echo "pulling image failed"
+                    exit 1
+                fi
             fi
             ;;
         *)
