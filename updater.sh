@@ -121,7 +121,7 @@ updateSelf() {
 
 
 redeployContainer() {
-    docker-compose --no-ansi up -d "$1" 2>&1 | log 0
+    docker-compose --ansi never up -d "$1" 2>&1 | log 0
     return ${PIPESTATUS[0]}
 }
 
@@ -170,7 +170,7 @@ if [[ -z "$1" ]]; then
     strtMsg
     if [[ -f .rd_flag ]]; then
         echo "redeploying containers ..." | log 1
-        docker-compose --no-ansi up -d 2>&1 | log 0
+        docker-compose --ansi never up -d 2>&1 | log 0
         if [[ ${PIPESTATUS[0]} -eq 0 ]]; then
             echo "redeploying containers successful" | log 1
             rm .rd_flag
