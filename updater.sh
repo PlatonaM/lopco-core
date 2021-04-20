@@ -212,24 +212,44 @@ else
             fi
             ;;
         deploy)
-            echo "deploying containers ..."
-            echo
-            source ./load_env.sh ""
-            if docker-compose up -d; then
-                echo
-                echo "deploying containers successful"
-                exit 0
-            else
-                echo
-                echo "deploying containers failed"
-                exit 1
-            fi
-            ;;
-        pull)
             initCheck
             source ./load_env.sh ""
             if [[ -z "$2" ]]; then
+                echo "deploying lopco-core containers ..."
+                echo
+                echo "environment: '$LOPCO_CORE_ENVIRONMENT'"
+                echo
+                if docker-compose up -d; then
+                    echo
+                    echo "deploying containers successful"
+                    exit 0
+                else
+                    echo
+                    echo "deploying containers failed"
+                    exit 1
+                fi
+            else
+                echo "deploying $2 container ..."
+                echo
+                echo "environment: '$LOPCO_CORE_ENVIRONMENT'"
+                echo
+                if docker-compose up -d "$2"; then
+                    echo
+                    echo "deploying container successful"
+                    exit 0
+                else
+                    echo
+                    echo "deploying container failed"
+                    exit 1
+                fi
+            fi
+            ;;
+        pull)
+            source ./load_env.sh ""
+            if [[ -z "$2" ]]; then
                 echo "pulling lopco-core images ..."
+                echo
+                echo "environment: '$LOPCO_CORE_ENVIRONMENT'"
                 echo
                 if docker-compose pull; then
                     echo
