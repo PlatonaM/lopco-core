@@ -276,6 +276,32 @@ else
                 fi
             fi
             ;;
+        purge)
+            source ./load_env.sh ""
+            while true; do
+        		echo -n -e "remove lopco-core containers, images and volumes? (y/n): "
+        		read input
+        		if [ "$input" == "y" ] || [ "$input" == "n" ]; then
+        			if [ "$input" == "y" ]; then
+        				break
+        			else
+        				exit 0
+        			fi
+        		fi
+        	done
+            echo
+            echo "removing lopco-core containers, images and volumes ..."
+            echo
+            if docker-compose down -v --rmi all; then
+                echo
+                echo "purge successful"
+                exit 0
+            else
+                echo
+                echo "purge failed"
+                exit 1
+            fi
+            ;;
         *)
             echo "unknown argument: '$1'"
             exit 1
