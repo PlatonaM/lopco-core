@@ -34,7 +34,7 @@ services:
 
   lopco-job-manager:
     container_name: job-manager
-    image: platonam/lopco-job-manager:${LOPCO_CORE_ENVIRONMENT}
+    image: ghcr.io/platonam/lopco-http-protocol-adapter:${LOPCO_CORE_ENVIRONMENT}
     expose:
       - 80
     volumes:
@@ -127,7 +127,7 @@ services:
 
   lopco-deployment-manager:
     container_name: deployment-manager
-    image: platonam/lopco-deployment-manager:${LOPCO_CORE_ENVIRONMENT}
+    image: ghcr.io/platonam/lopco-deployment-manager:${LOPCO_CORE_ENVIRONMENT}
     expose:
       - 80
     environment:
@@ -145,7 +145,7 @@ services:
 
   lopco-update-manager:
     container_name: update-manager
-    image: platonam/lopco-update-manager:${LOPCO_CORE_ENVIRONMENT}
+    image: ghcr.io/platonam/lopco-update-manager:${LOPCO_CORE_ENVIRONMENT}
     expose:
       - 80
     environment:
@@ -168,7 +168,7 @@ services:
 
   lopco-backup-manager:
     container_name: backup-manager
-    image: platonam/lopco-backup-manager:${LOPCO_CORE_ENVIRONMENT}
+    image: ghcr.io/platonam/lopco-backup-manager:${LOPCO_CORE_ENVIRONMENT}
     expose:
       - 80
     environment:
@@ -189,7 +189,7 @@ services:
 
   lopco-gui:
     container_name: gui
-    image: platonam/lopco-gui:${LOPCO_CORE_ENVIRONMENT}
+    image: ghcr.io/platonam/lopco-gui:${LOPCO_CORE_ENVIRONMENT}
     expose:
       - 80
     ports:
