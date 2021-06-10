@@ -34,7 +34,7 @@ services:
 
   lopco-job-manager:
     container_name: job-manager
-    image: ghcr.io/platonam/lopco-http-protocol-adapter:${LOPCO_CORE_ENVIRONMENT}
+    image: ghcr.io/platonam/lopco-job-manager:${LOPCO_CORE_ENVIRONMENT}
     expose:
       - 80
     volumes:
